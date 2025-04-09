@@ -78,36 +78,42 @@ function getDogSearchResults(_breeds:string[], _zipCodes:string[], _ageMin:numbe
   })
 }
 
-function getDogs(dogIDArray:any){
-  const getDogConfig = {
-    method: 'post',
-    url: `${endpoint}/dogs`,
-    data: dogIDArray,
-    withCredentials: true
-  }
-  axios(getDogConfig)
-  .then(function (response:any) {
-    console.log(response);
+function getDogs(dogIDArray:any):Promise<any>{
+  return new Promise((resolve, reject) => {
+    const getDogConfig = {
+      method: 'post',
+      url: `${endpoint}/dogs`,
+      data: dogIDArray,
+      withCredentials: true
+    }
+    axios(getDogConfig)
+    .then(function (response:any) {
+      console.log(response);
+      resolve(response);
+    })
+    .catch(function (error: any) {
+      console.log(error);
+      reject(error);
+    });
   })
-  .catch(function (error: any) {
-    console.log(error);
-  });
 }
 
-function getMatchingDog(dogIDArray:string[]){
-  const getMatchDogConfig = {
-    method: 'post',
-    url: `${endpoint}/dogs/match`,
-    body: dogIDArray,
-    withCredentials: true
-  }
-  axios(getMatchDogConfig)
-  .then(function (response:any) {
-    console.log(response);
+function getMatchingDog(dogIDArray:string[]):Promise<any>{
+  return new Promise((resolve, reject) => {
+    const getMatchDogConfig = {
+      method: 'post',
+      url: `${endpoint}/dogs/match`,
+      body: dogIDArray,
+      withCredentials: true
+    }
+    axios(getMatchDogConfig)
+    .then(function (response:any) {
+      console.log(response);
+    })
+    .catch(function (error: any) {
+      console.log(error);
+    });
   })
-  .catch(function (error: any) {
-    console.log(error);
-  });
 }
 
 export {login, logout, getDogBreeds, getDogSearchResults, getDogs, getMatchingDog};

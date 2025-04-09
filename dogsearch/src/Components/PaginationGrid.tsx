@@ -2,7 +2,7 @@ import * as React from "react";
 import { Box, Pagination, Grid } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogBreeds, getDogSearchResults, getDogs } from "../Helpers/api-client";
-
+import DogCard from "./DogCard";
 
 
 export default function PaginationGrid(){
@@ -14,8 +14,13 @@ export default function PaginationGrid(){
         .then((data: any) => {
             console.log('this is a test');
             console.log(data);
-            setResults(data.resultIds);
-            getDogs(data.resultIds);
+            getDogs(data.resultIds)
+            .then((data: any) => {
+                setResults(data.data);
+            })
+            .catch((error) => {
+                console.log(error);
+            })
         })
         .catch((error: any) => {
             console.log(error);
@@ -23,11 +28,11 @@ export default function PaginationGrid(){
     }, []);
 
     return (
-        <Box width={'300px'} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-            <Grid container spacing={{ xs: 2, md: 3 }} columns={{ xs: 4, sm: 8, md: 12 }}>
+        <Box width={'100%'} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center', padding: '15px'}}>
+            <Grid container spacing={{ xs: 1, md: 2 }} columns={{ xs: 4, sm: 10, md: 15 }}>
                 {results.map((value, index) => (
                     <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
-                        <Box>{value}</Box>
+                        <DogCard dogObject={value} />
                     </Grid>
                 ))}
             </Grid>
