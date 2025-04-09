@@ -58,7 +58,7 @@ function getDogBreeds():Promise<any>{
   })
 }
 
-function getDogSearchResults(_breeds:string[], _zipCodes:string[], _ageMin:number, _ageMax:number):Promise<any>{
+function getDogSearchResults(_breeds:string[], _zipCodes:string[], _ageMin:number, _ageMax:number, size: number, from: string, sort: string):Promise<any>{
   return new Promise((resolve, reject) => {
     axios.get(`${endpoint}/dogs/search`,{
       params: {
@@ -107,6 +107,48 @@ function getMatchingDog(dogIDArray:string[]):Promise<any>{
       withCredentials: true
     }
     axios(getMatchDogConfig)
+    .then(function (response:any) {
+      console.log(response);
+    })
+    .catch(function (error: any) {
+      console.log(error);
+    });
+  })
+}
+
+function location(zipCodeArray:string[]):Promise<any>{
+  return new Promise((resolve, reject) => {
+    const getLocationConfig = {
+      method: 'post',
+      url: `${endpoint}/locations`,
+      body: zipCodeArray,
+      withCredentials: true
+    }
+    axios(getLocationConfig)
+    .then(function (response:any) {
+      console.log(response);
+    })
+    .catch(function (error: any) {
+      console.log(error);
+    });
+  })
+}
+
+function locationSearch(city: string, states: string[], geoBoundingBox: any, size: number, from:string):Promise<any>{
+  return new Promise((resolve, reject) => {
+    const getLocationConfig = {
+      method: 'post',
+      url: `${endpoint}/locations`,
+      body: {
+        city: city,
+        states: states,
+        geoBoundingBox: geoBoundingBox,
+        size: size,
+        from: from
+      },
+      withCredentials: true
+    }
+    axios(getLocationConfig)
     .then(function (response:any) {
       console.log(response);
     })

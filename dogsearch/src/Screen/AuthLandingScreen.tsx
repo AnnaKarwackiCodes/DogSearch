@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import DrawerList from "../Components/DrawerList";
 import MenuIcon from '@mui/icons-material/Menu';
 import PaginationGrid from "../Components/PaginationGrid";
+import SearchBar from "../Components/SearchBar";
 
 
 export default function AuthLandingScreen(){
@@ -18,6 +19,7 @@ export default function AuthLandingScreen(){
             <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                 <Typography variant="h3">Doggle</Typography>
                 <Typography variant="h4">The search engine for dogs</Typography>
+                <SearchBar />
                 <PaginationGrid />
             </Box>
         </Box>
