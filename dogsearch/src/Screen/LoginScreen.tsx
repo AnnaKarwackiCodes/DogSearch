@@ -1,18 +1,18 @@
 import * as React from "react";
 import { Box, Card, Typography, TextField, Button, Alert } from "@mui/material";
 import { login } from "../Helpers/api-client";
+import { useDispatch, useSelector } from 'react-redux';
 
 
 export default function LoginScreen(){
 
     const [name, setName] = React.useState('');
-    const [email, setEmail] = React.useState('');    
-    const [loggedIn, setLoggedIn] = React.useState(-1);
-    const loginSuccess = React.useRef(-1);
+    const [email, setEmail] = React.useState('');  
+    const dispatch = useDispatch();  
 
-    React.useEffect(() => {
-        setLoggedIn(loginSuccess.current);
-    }, [loginSuccess.current]);
+    const loginSuccess = useSelector((store: any) => {
+        return store.userInfo.loginSuccess;
+      });
 
     return (
         <Box width={'300px'} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
@@ -43,12 +43,12 @@ export default function LoginScreen(){
                     <Button 
                         variant="contained"
                         onClick={() => {
-                            const message = login(name, email);
-                            console.log(message);
+                            login(name, email, dispatch);
                         }}
                     >
                         Login
                     </Button>
+                    {loginSuccess === 0 && <Alert severity="error">There was an issue logging in, please check your name and email</Alert>}
                 </Box>
             </Card>
         </Box>
