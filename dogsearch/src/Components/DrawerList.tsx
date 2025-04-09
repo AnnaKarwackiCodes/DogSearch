@@ -15,11 +15,10 @@ export default function DrawerList(){
 
     return(
         <Box width={'200px'} p={'15px'}>
-            <Button variant="outlined" onClick={()=>{logout(dispatch);}}>Logout</Button>
             <Box marginTop={'15px'}>
                 <Typography>Welcome {userName}!</Typography>
-                <Button variant="outlined" onClick={()=>{getDogBreeds();}}>test</Button>
             </Box>
+            <Button variant="outlined" onClick={()=>{logout(dispatch);}}>Logout</Button>
         </Box>
     );
 }
