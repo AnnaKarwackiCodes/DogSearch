@@ -5,24 +5,23 @@ import DrawerList from "../Components/DrawerList";
 import MenuIcon from '@mui/icons-material/Menu';
 import PaginationGrid from "../Components/PaginationGrid";
 import SearchBar from "../Components/SearchBar";
+import SearchScreen from "./SearchScreen";
+import FavoritedDogsScreen from "./FavoritedDogsScreen";
 
 
 export default function AuthLandingScreen(){
-
+    const curScreen = useSelector((store: any) => {
+        return store.userInfo.curScreen;
+      });
     const [isOpen, setIsOpen] = React.useState(false);
     const [searchResults, setSearchResults] = React.useState(['']);
     return (
         <Box width={'100%'}>
-            <Button onClick={() => {setIsOpen(true)}}><MenuIcon/></Button>
+            <Button style={{position:'fixed', left:0, top: 0, backgroundColor: 'white'}} onClick={() => {setIsOpen(true)}}><MenuIcon/></Button>
             <Drawer open={isOpen} onClose={()=>{setIsOpen(false)}} style={{flex: 1, left: 0}}>
                 <DrawerList />
             </Drawer>
-            <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-                <Typography variant="h3">Doggle</Typography>
-                <Typography variant="h4">The search engine for dogs</Typography>
-                <SearchBar/>
-                <PaginationGrid/>
-            </Box>
+            {curScreen === 0 ? <SearchScreen /> : <FavoritedDogsScreen/>}
         </Box>
     )
 }

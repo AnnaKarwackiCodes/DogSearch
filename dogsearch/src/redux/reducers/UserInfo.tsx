@@ -7,6 +7,7 @@ const userInfo = createSlice({
     userEmail: '',
     loginSuccess: -1, //-1 no attempt has been made, 0 failure, 1 Success
     favoriteDogs: [],
+    curScreen: 0, // 0 search, 1 favorite
   },
   reducers: {
     setUserBaseInfo:(state, action) => {
@@ -18,18 +19,20 @@ const userInfo = createSlice({
     },
     addToFavorites:(state, action) => {
       state.favoriteDogs = action.payload.favoriteDogs
-      console.log('fav dogs');
-      console.log(state.favoriteDogs);
+    },
+    setCurScreen :(state, action) => {
+      state.curScreen = action.payload.value
     },
     userReset: (state, action) => {
       state.userName = '';
       state.userEmail = '';
       state.loginSuccess = -1;
       state.favoriteDogs = [];
+      state.curScreen = 0;
     }
   }
 })
 
-export const { setUserBaseInfo, setLoginSuccess, addToFavorites, userReset } = userInfo.actions
+export const { setUserBaseInfo, setLoginSuccess, addToFavorites, setCurScreen, userReset } = userInfo.actions
 
 export default userInfo.reducer;

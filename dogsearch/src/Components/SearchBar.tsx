@@ -48,7 +48,7 @@ export default function SearchBar(){
     }
 
     return (
-        <Box style={{width: 450}}>
+        <Box style={{width: 450}} margin={'auto'}>
             <Autocomplete
                 disablePortal
                 options={dogBreedsList}

@@ -20,14 +20,23 @@ export default function DogCard({dogObject}: DogCardObj){
     const [isFaved, setIsFaved] = React.useState(false);
 
     React.useEffect(() => {
+        checkFavorites();
+    }, [favDogList]);
+
+    React.useEffect(() => {
+        checkFavorites();
+    }, []);
+
+    function checkFavorites(){
         let temp: Dog[] = [];
         favDogList.forEach((element: Dog) => {
             temp.push(element);
         });
         setLocalFav(temp);
-    }, [favDogList]);
-
-      function addFavorite(){
+        setIsFaved(favDogList.map((e: Dog) => e.id).indexOf(dogObject.id) !== -1);
+        console.log(favDogList.indexOf(dogObject) !== -1);
+    }
+    function addFavorite(){
         if(isFaved){
             setIsFaved(false);
             let temp = localFav.filter((favDog: Dog) => favDog.id !== dogObject.id);
@@ -39,7 +48,7 @@ export default function DogCard({dogObject}: DogCardObj){
             dispatch(addToFavorites({favoriteDogs: temp}));
             setIsFaved(true);
         }
-      }
+    }
 
     return (
         <Card variant="outlined" style={{width: 250, alignContent: 'center'}}>
