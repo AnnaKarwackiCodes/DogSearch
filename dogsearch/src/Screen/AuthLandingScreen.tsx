@@ -10,6 +10,7 @@ import SearchBar from "../Components/SearchBar";
 export default function AuthLandingScreen(){
 
     const [isOpen, setIsOpen] = React.useState(false);
+    const [searchResults, setSearchResults] = React.useState(['']);
     return (
         <Box width={'100%'}>
             <Button onClick={() => {setIsOpen(true)}}><MenuIcon/></Button>
@@ -19,8 +20,8 @@ export default function AuthLandingScreen(){
             <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                 <Typography variant="h3">Doggle</Typography>
                 <Typography variant="h4">The search engine for dogs</Typography>
-                <SearchBar />
-                <PaginationGrid />
+                <SearchBar/>
+                <PaginationGrid/>
             </Box>
         </Box>
     )

@@ -1,39 +1,62 @@
 import * as React from "react";
-import { Card, CardContent, CardMedia, Box, Typography, Button, Autocomplete, TextField } from "@mui/material";
+import { Box, Button, Autocomplete, TextField } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
-import { getDogBreeds, getDogSearchResults, getDogs } from "../Helpers/api-client";
-import { Dog, DogCardObj } from "../Helpers/typing";
-import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
-import { useRef } from 'react';
+import { getDogBreeds, getDogs, getDogSearchResults } from "../Helpers/api-client";
+import { setSearchResults, setNextPage, setPrevPage, setTotalEntries, setTotalPages } from "../redux/reducers/SearchResults";
 
 export default function SearchBar(){
-    const [dogBreeds, setDogBreeds] = React.useState([]);
+    const dispatch = useDispatch();
+    const [dogBreedsList, setDogBreedsList] = React.useState([]);
+    const [dogBreed, setDogBreed] = React.useState('');
     const [zipCode, setZipCode] = React.useState('');
     const [minAge, setMinAge] = React.useState(0);
     const [maxAge, setMaxAge] = React.useState(100);
-    const breedList = useRef([]);
+    
 
     React.useEffect(() => {
         getDogBreeds()
         .then((data: any) => {
-            breedList.current = data.data;
+            setDogBreedsList(data);
         })
         .catch((error: any) => {
             console.log(error);
         });
     }, []);
-
-    React.useEffect(() => {
-        setDogBreeds(breedList.current);
-        console.log(breedList.current);
-    }, [breedList.current]);
+    
+    function startSearch(){
+        dispatch(setSearchResults({results: []}));
+        getDogSearchResults([dogBreed], [zipCode], minAge, maxAge, 25, "", "")
+        .then((data: any)=> {
+            console.log(data);
+            dispatch(setNextPage({next: data.next?data.next: ''}));
+            dispatch(setPrevPage({next: data.prev?data.prev: ''}));
+            dispatch(setTotalEntries({total: data.total}));
+            dispatch(setTotalPages({value: Math.round(data.total/25)}));
+            getDogs(data.resultIds)
+            .then((dogs: any) => {
+                console.log(dogs);
+                dispatch(setSearchResults({results: dogs.data}));
+            })
+            .catch((error: any) => {
+                console.log(error);
+            })
+            
+        })
+        .catch((error: any) => {
+            console.log(error);
+        });
+    }
 
     return (
         <Box style={{width: 450}}>
             <Autocomplete
                 disablePortal
-                options={dogBreeds}
+                options={dogBreedsList}
                 sx={{ width: 450 }}
+                value={dogBreed}
+                onInputChange={(event, newInputValue) => {
+                    setDogBreed(newInputValue);
+                  }}
                 renderInput={(params) => <TextField {...params} label="Dog Breeds" />}
             />
             <TextField 
@@ -68,6 +91,7 @@ export default function SearchBar(){
                 }}
                 style={{margin: 5, width: 80}}
             />
+            <Button variant="outlined" onClick={()=>{startSearch()}}>Search</Button>
         </Box>
     )
 }

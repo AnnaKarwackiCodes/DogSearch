@@ -18,10 +18,16 @@ const userInfo = createSlice({
     },
     addToFavorites:(state, action) => {
       state.favoriteDogs = action.payload.favoriteDogs
+    },
+    userReset: (state, action) => {
+      state.userName = '';
+      state.userEmail = '';
+      state.loginSuccess = -1;
+      state.favoriteDogs = [];
     }
   }
 })
 
-export const { setUserBaseInfo, setLoginSuccess, addToFavorites } = userInfo.actions
+export const { setUserBaseInfo, setLoginSuccess, addToFavorites, userReset } = userInfo.actions
 
 export default userInfo.reducer;

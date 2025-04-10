@@ -1,5 +1,6 @@
 import axios from "axios";
-import { setLoginSuccess, setUserBaseInfo } from "../redux/reducers/UserInfo";
+import { setLoginSuccess, setUserBaseInfo, userReset } from "../redux/reducers/UserInfo";
+import { searchReset } from "../redux/reducers/SearchResults";
 
 const endpoint = "https://frontend-take-home-service.fetch.com";
 
@@ -38,8 +39,8 @@ function logout(dispatch: Function){
   axios(logoutConfig)
   .then(function (response:any) {
     console.log(response);
-    dispatch(setUserBaseInfo({name: '', email:''}));
-    dispatch(setLoginSuccess({state:-1}));
+    dispatch(userReset({}));
+    dispatch(searchReset({}));
   })
   .catch(function (error: any) {
     console.log(error);
@@ -63,7 +64,7 @@ function getDogSearchResults(_breeds:string[], _zipCodes:string[], _ageMin:numbe
     axios.get(`${endpoint}/dogs/search`,{
       params: {
         breed: _breeds,
-        zipCodes: _zipCodes,
+        zipCodes: null,
         ageMin: _ageMin,
         ageMax: _ageMax
       },
@@ -116,6 +117,20 @@ function getMatchingDog(dogIDArray:string[]):Promise<any>{
   })
 }
 
+function getPaginationResult(query: string):Promise<any>{
+  return new Promise((resolve, reject) => {
+    axios.get(`${endpoint}${query}`,{
+      withCredentials: true
+    })
+    .then(function (response:any){
+      resolve(response.data);
+    })
+    .catch(function (error: any) {
+      reject(error);
+    });
+  })
+}
+
 function location(zipCodeArray:string[]):Promise<any>{
   return new Promise((resolve, reject) => {
     const getLocationConfig = {
@@ -158,4 +173,4 @@ function locationSearch(city: string, states: string[], geoBoundingBox: any, siz
   })
 }
 
-export {login, logout, getDogBreeds, getDogSearchResults, getDogs, getMatchingDog};
+export {login, logout, getDogBreeds, getDogSearchResults, getDogs, getMatchingDog, getPaginationResult};

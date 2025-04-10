@@ -18,7 +18,11 @@ export default function DrawerList(){
             <Box marginTop={'15px'}>
                 <Typography>Welcome {userName}!</Typography>
             </Box>
-            <Button variant="outlined" onClick={()=>{logout(dispatch);}}>Logout</Button>
+            <Button variant="outlined" onClick={()=>{
+                logout(dispatch);
+            }}>
+                Logout
+            </Button>
         </Box>
     );
 }
