@@ -18,6 +18,8 @@ const userInfo = createSlice({
     },
     addToFavorites:(state, action) => {
       state.favoriteDogs = action.payload.favoriteDogs
+      console.log('fav dogs');
+      console.log(state.favoriteDogs);
     },
     userReset: (state, action) => {
       state.userName = '';

@@ -60,7 +60,7 @@ export default function PaginationGrid(){
                     </Grid>
                 ))}
             </Grid>
-            <Pagination count={pageTotal} page={curPage} onChange={handleChange} siblingCount={0} />
+            {pageTotal > 0 && <Pagination count={pageTotal} page={curPage} onChange={handleChange} siblingCount={0} />}
         </Box>
     )
 }
