@@ -38,7 +38,6 @@ function logout(dispatch: Function){
   }
   axios(logoutConfig)
   .then(function (response:any) {
-    console.log(response);
     dispatch(userReset({}));
     dispatch(searchReset({}));
   })
@@ -104,15 +103,17 @@ function getMatchingDog(dogIDArray:string[]):Promise<any>{
     const getMatchDogConfig = {
       method: 'post',
       url: `${endpoint}/dogs/match`,
-      body: dogIDArray,
+      data: dogIDArray,
       withCredentials: true
     }
     axios(getMatchDogConfig)
     .then(function (response:any) {
       console.log(response);
+      resolve(response);
     })
     .catch(function (error: any) {
       console.log(error);
+      reject(error);
     });
   })
 }

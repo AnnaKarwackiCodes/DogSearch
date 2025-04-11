@@ -15,8 +15,12 @@ export default function LoginScreen(){
       });
 
     return (
-        <Box width={'300px'} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-            <Card variant="outlined">
+        <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+            <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
+                <Typography variant="h3">Doggle</Typography>
+                <Typography variant="h4">The search engine for dogs</Typography>
+            </Box>
+            <Card variant="outlined" style={{width:'300px', margin:'auto', padding:15}}>
                 <Typography variant="h4">Login</Typography>
                 <Typography variant="body2">Enter your name and email to view cute dogs in your area!</Typography>
                 <Box style={{padding: 15}}>

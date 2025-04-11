@@ -8,7 +8,7 @@ import FavoriteIcon from '@mui/icons-material/Favorite';
 import { addToFavorites } from "../redux/reducers/UserInfo";
 
 
-export default function DogCard({dogObject}: DogCardObj){
+export default function DogCard({dogObject, showFav}: DogCardObj){
     const dispatch = useDispatch();
 
     const favDogList = useSelector((store: any) => {
@@ -27,6 +27,10 @@ export default function DogCard({dogObject}: DogCardObj){
         checkFavorites();
     }, []);
 
+    React.useEffect(() => {
+        checkFavorites();
+    }, [dogObject])
+
     function checkFavorites(){
         let temp: Dog[] = [];
         favDogList.forEach((element: Dog) => {
@@ -34,7 +38,7 @@ export default function DogCard({dogObject}: DogCardObj){
         });
         setLocalFav(temp);
         setIsFaved(favDogList.map((e: Dog) => e.id).indexOf(dogObject.id) !== -1);
-        console.log(favDogList.indexOf(dogObject) !== -1);
+        //console.log(favDogList.indexOf(dogObject) !== -1);
     }
     function addFavorite(){
         if(isFaved){
@@ -51,7 +55,7 @@ export default function DogCard({dogObject}: DogCardObj){
     }
 
     return (
-        <Card variant="outlined" style={{width: 250, alignContent: 'center'}}>
+        <Card variant="outlined" style={{width: 250, alignContent: 'center', margin: 'auto'}}>
             <CardContent>
             <CardMedia
                 sx={{ width: 200, height: 200 }}
@@ -62,12 +66,12 @@ export default function DogCard({dogObject}: DogCardObj){
                 <Typography>Meet {dogObject.name}!</Typography>
                 <Typography>Breed: {dogObject.breed}</Typography>
                 <Typography>Zip Code: {dogObject.zip_code}</Typography>
-                <Button style={{color: 'red'}} onClick={() => {
+                {showFav && <Button style={{color: 'red'}} onClick={() => {
                     addFavorite();
                 }}> 
                     {isFaved ? <FavoriteIcon style={{color: 'red'}}/> : <FavoriteBorderIcon style={{color: 'red'}}/> }
                     {isFaved ? "Unfavorite" : "Favorite"}
-                </Button>
+                </Button>}
             </Box>
             </CardContent>
         </Card>

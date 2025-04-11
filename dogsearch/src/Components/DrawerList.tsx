@@ -4,8 +4,9 @@ import { logout } from "../Helpers/api-client";
 import SearchIcon from '@mui/icons-material/Search';
 import { setCurScreen } from "../redux/reducers/UserInfo";
 import FavoriteBorderIcon from '@mui/icons-material/FavoriteBorder';
+import MenuOpenIcon from '@mui/icons-material/MenuOpen';
 
-export default function DrawerList(){
+export default function DrawerList({closeMenu}: any){
     const dispatch = useDispatch();
 
     const userName = useSelector((store: any) => {
@@ -17,7 +18,10 @@ export default function DrawerList(){
 
     return(
         <Box width={'200px'} p={'15px'}>
-            <Box marginTop={'15px'}>
+            <Box style={{position:'fixed', left:180, top: 0}}>
+                <Button onClick={() => {closeMenu();}}><MenuOpenIcon /></Button>
+            </Box>
+            <Box marginTop={'35px'}>
                 <Typography>Welcome {userName}!</Typography>
             </Box>
             <List>

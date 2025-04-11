@@ -20,7 +20,8 @@ interface Coordinates {
 }
 
 interface DogCardObj{
-    dogObject: Dog
+    dogObject: Dog;
+    showFav: boolean;
 }
 
 export type {Dog, Location, Coordinates, DogCardObj};
