@@ -45,7 +45,7 @@ export default function SearchBar(){
             .then((dogs: any) => {
                 console.log(dogs);
                 dispatch(setSearchResults({results: dogs.data}));
-
+                setHideSearchBar(true);
             })
             .catch((error: any) => {
                 console.log(error);
