@@ -39,7 +39,11 @@ export default function FavoritedDogsScreen(){
         setPageTotal(Math.round(results.length/25) + 1);
         setFavDogIds(results.map((e: Dog) => e.id));
         console.log(results.map((e: Dog) => e.id));
-    }, [results, curPage])
+    }, [results, curPage]);
+
+    React.useEffect(() => {
+        window.scrollTo(0, 0);
+    }, [curPage]);
 
     const [open, setOpen] = React.useState(false);
     const handleOpen = () => setOpen(true);
