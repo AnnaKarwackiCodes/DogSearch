@@ -1,14 +1,15 @@
 import * as React from "react";
 import { Box, Button, Autocomplete, TextField } from "@mui/material";
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { getDogBreeds, getDogs, getDogSearchResults } from "../Helpers/api-client";
 import { setSearchResults, setNextPage, setPrevPage, setTotalEntries, setTotalPages } from "../redux/reducers/SearchResults";
 
 export default function SearchBar(){
     const dispatch = useDispatch();
     const [dogBreedsList, setDogBreedsList] = React.useState([]);
-    const [dogBreed, setDogBreed] = React.useState('');
-    const [zipCode, setZipCode] = React.useState('');
+    const stringarray : string[] = []
+    const [dogBreed, setDogBreed] = React.useState(stringarray);
+    const [zipCode, setZipCode] = React.useState(stringarray);
     const [minAge, setMinAge] = React.useState(0);
     const [maxAge, setMaxAge] = React.useState(100);
     
@@ -25,7 +26,7 @@ export default function SearchBar(){
     
     function startSearch(){
         dispatch(setSearchResults({results: []}));
-        getDogSearchResults([dogBreed], [zipCode], minAge, maxAge, 25, "", "")
+        getDogSearchResults(dogBreed, zipCode, minAge, maxAge, 25, "", "")
         .then((data: any)=> {
             console.log(data);
             dispatch(setNextPage({next: data.next?data.next: ''}));
@@ -53,9 +54,9 @@ export default function SearchBar(){
                 disablePortal
                 options={dogBreedsList}
                 sx={{ width: 450 }}
-                value={dogBreed}
+                value={dogBreed[0]}
                 onInputChange={(event, newInputValue) => {
-                    setDogBreed(newInputValue);
+                    setDogBreed([newInputValue]);
                   }}
                 renderInput={(params) => <TextField {...params} label="Dog Breeds" />}
             />
@@ -65,7 +66,7 @@ export default function SearchBar(){
                 variant="outlined" 
                 value={zipCode}
                 onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                    setZipCode(event.target.value);
+                    setZipCode([event.target.value]);
                 }}
                 style={{margin: 5}}
             />

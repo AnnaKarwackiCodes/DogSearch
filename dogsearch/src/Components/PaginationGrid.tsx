@@ -1,15 +1,10 @@
 import * as React from "react";
 import { Box, Pagination, Grid, Stack } from "@mui/material";
-import { useDispatch, useSelector } from 'react-redux';
-import { getDogBreeds, getDogSearchResults, getDogs, getPaginationResult } from "../Helpers/api-client";
 import DogCard from "./DogCard";
 import { Dog } from "../Helpers/typing";
-import { setNextPage, setPrevPage, setSearchResults } from "../redux/reducers/SearchResults";
 
 
 export default function PaginationGrid({results, pageTotal, handlePageChange, curPage}: any){
-
-    const dispatch = useDispatch();
     
     const [localResults, setLocalResults] = React.useState([]);
 
@@ -28,7 +23,7 @@ export default function PaginationGrid({results, pageTotal, handlePageChange, cu
                     </Grid>
                 ))}
             </Grid>
-            {pageTotal > 0 && <Stack alignItems="center" padding={5}><Pagination count={pageTotal} page={curPage} onChange={handlePageChange} siblingCount={0}/></Stack>}
+            {pageTotal > 1 && <Stack alignItems="center" padding={5}><Pagination count={pageTotal} page={curPage} onChange={handlePageChange} siblingCount={0}/></Stack>}
         </Box>
     )
 }

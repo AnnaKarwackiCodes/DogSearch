@@ -1,6 +1,7 @@
 import axios from "axios";
 import { setLoginSuccess, setUserBaseInfo, userReset } from "../redux/reducers/UserInfo";
 import { searchReset } from "../redux/reducers/SearchResults";
+import qs from "qs";
 
 const endpoint = "https://frontend-take-home-service.fetch.com";
 
@@ -58,14 +59,17 @@ function getDogBreeds():Promise<any>{
   })
 }
 
-function getDogSearchResults(_breeds:string[], _zipCodes:string[], _ageMin:number, _ageMax:number, size: number, from: string, sort: string):Promise<any>{
+function getDogSearchResults(breeds:string[], zipCodes:string[], ageMin:number, ageMax:number, size: number, from: string, sort: string):Promise<any>{
   return new Promise((resolve, reject) => {
     axios.get(`${endpoint}/dogs/search`,{
       params: {
-        breed: _breeds,
-        zipCodes: null,
-        ageMin: _ageMin,
-        ageMax: _ageMax
+        breeds: breeds,
+        zipCodes: zipCodes,
+        ageMin: ageMin,
+        ageMax: ageMax
+      },
+      paramsSerializer: function (params) {
+        return qs.stringify(params, {arrayFormat: 'brackets'})
       },
       withCredentials: true
     })

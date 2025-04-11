@@ -18,8 +18,8 @@ export default function DrawerList({closeMenu}: any){
 
     return(
         <Box width={'200px'} p={'15px'}>
-            <Box style={{position:'fixed', left:180, top: 0}}>
-                <Button onClick={() => {closeMenu();}}><MenuOpenIcon /></Button>
+            <Box style={{position:'fixed', left:100, top: 0}}>
+                <Button onClick={() => {closeMenu();}}>Close Menu<MenuOpenIcon /></Button>
             </Box>
             <Box marginTop={'35px'}>
                 <Typography>Welcome {userName}!</Typography>
