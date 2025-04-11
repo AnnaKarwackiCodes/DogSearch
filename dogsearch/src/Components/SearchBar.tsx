@@ -1,9 +1,10 @@
 import * as React from "react";
-import { Box, Button, Autocomplete, TextField, Typography, Select, MenuItem, SelectChangeEvent } from "@mui/material";
+import { Box, Button, Autocomplete, TextField, Typography, Select, MenuItem, SelectChangeEvent, InputLabel, Stack, Paper } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { getDogBreeds, getDogs, getDogSearchResults } from "../Helpers/api-client";
 import { setSearchResults, setNextPage, setPrevPage, setTotalEntries, setTotalPages } from "../redux/reducers/SearchResults";
 import Divider from '@mui/material/Divider';
+import SearchIcon from '@mui/icons-material/Search';
 
 
 export default function SearchBar(){
@@ -17,6 +18,8 @@ export default function SearchBar(){
     const [resultSize, setResultSize] = React.useState(25);
     const [sortQueryField, setSortQueryField] = React.useState('breed');
     const [sortQueryDirection, setSortQueryDirection] = React.useState('asc');
+
+    const [hideSearchBar, setHideSearchBar] = React.useState(false);
 
     React.useEffect(() => {
         getDogBreeds()
@@ -61,88 +64,102 @@ export default function SearchBar(){
 
     return (
         <Box>
-            <Box style={{width: '50%'}} margin={'auto'}>
-                <Autocomplete
-                    disablePortal
-                    options={dogBreedsList}
-                    sx={{ width: 450 }}
-                    value={dogBreed[0]}
-                    onInputChange={(event, newInputValue) => {
-                        setDogBreed([newInputValue]);
-                    }}
-                    renderInput={(params) => <TextField {...params} label="Dog Breeds" />}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Min Age" 
-                    variant="outlined" 
-                    type="number"
-                    value={minAge}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setMinAge(event.target.valueAsNumber);
-                    }}
-                    style={{margin: 5, width: 70}}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Max Age" 
-                    variant="outlined" 
-                    type="number"
-                    value={maxAge}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setMaxAge(event.target.valueAsNumber);
-                    }}
-                    style={{margin: 5, width: 80}}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="ZipCode" 
-                    variant="outlined" 
-                    value={zipCode}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setZipCode([event.target.value]);
-                    }}
-                    style={{margin: 5}}
-                />
-                <TextField 
-                    id="outlined-basic" 
-                    label="Number of Results per Page" 
-                    variant="outlined" 
-                    type="number"
-                    value={resultSize}
-                    onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
-                        setResultSize(event.target.valueAsNumber);
-                    }}
-                    style={{margin: 5, width: 200}}
-                />
+            <Box style={{width: '60%'}} margin={'auto'}>
+                {!hideSearchBar && <Paper elevation={3} style={{padding: 15}}>
                 <Box>
-                <Typography variant="body2">Sort by</Typography>
-                <Select
-                    labelId="field-select-label"
-                    id="field-select"
-                    value={sortQueryField}
-                    label="Field"
-                    onChange={handleQueryFieldChange}
-                    >
-                    <MenuItem value={'breed'}>Breed</MenuItem>
-                    <MenuItem value={'name'}>Name</MenuItem>
-                    <MenuItem value={'age'}>Age</MenuItem>
-                </Select>
-                <Select
-                    labelId="direction-select-label"
-                    id="direction-select"
-                    value={sortQueryField}
-                    label="Direction"
-                    onChange={handleQueryDirectionChange}
-                    >
-                    <MenuItem value={'asc'}>Acs</MenuItem>
-                    <MenuItem value={'desc'}>Desc</MenuItem>
-                </Select>
+                    <Autocomplete
+                        disablePortal
+                        options={dogBreedsList}
+                        value={dogBreed[0]}
+                        onInputChange={(event, newInputValue) => {
+                            setDogBreed([newInputValue]);
+                        }}
+                        renderInput={(params) => <TextField {...params} label="Dog Breeds" />}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="ZipCode" 
+                        variant="outlined" 
+                        value={zipCode}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                            setZipCode([event.target.value]);
+                        }}
+                        style={{margin: 5, marginTop: 10}}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Min Age" 
+                        variant="outlined" 
+                        type="number"
+                        value={minAge}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                            setMinAge(event.target.valueAsNumber);
+                        }}
+                        style={{margin: 5, marginTop: 10, width: 70}}
+                    />
+                    <TextField 
+                        id="outlined-basic" 
+                        label="Max Age" 
+                        variant="outlined" 
+                        type="number"
+                        value={maxAge}
+                        onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                            setMaxAge(event.target.valueAsNumber);
+                        }}
+                        style={{margin: 5, marginTop: 10, width: 80}}
+                    />
+                    <TextField 
+                            id="outlined-basic" 
+                            label="Number of Results per Page" 
+                            variant="outlined" 
+                            type="number"
+                            value={resultSize}
+                            onChange={(event: React.ChangeEvent<HTMLInputElement>) => {
+                                setResultSize(event.target.valueAsNumber);
+                            }}
+                            style={{margin: 5, marginTop: 10, width: 200}}
+                        />
+                </Box>
+                <Box>
+                    <Typography variant="body1">Sort by:</Typography>
+                    <Stack direction="row" spacing={2}>
+                        <Box>
+                            <InputLabel id="field-select-helper-label">Field</InputLabel>
+                            <Select
+                                labelId="field-select-label"
+                                id="field-select"
+                                value={sortQueryField}
+                                label="Field"
+                                onChange={handleQueryFieldChange}
+                                style={{width: 100}}
+                                >
+                                <MenuItem value={'breed'}>Breed</MenuItem>
+                                <MenuItem value={'name'}>Name</MenuItem>
+                                <MenuItem value={'age'}>Age</MenuItem>
+                            </Select>
+                        </Box>
+                        <Box>
+                        <InputLabel id="direction-select-helper-label">Direction</InputLabel>
+                        <Select
+                            labelId="direction-select-label"
+                            id="direction-select"
+                            value={sortQueryDirection}
+                            label="Direction"
+                            onChange={handleQueryDirectionChange}
+                            style={{width: 100}}
+                            >
+                            <MenuItem value={'asc'}>Ascending</MenuItem>
+                            <MenuItem value={'desc'}>Descending</MenuItem>
+                        </Select>
+                        </Box>
+                    </Stack>
+                </Box>
+                <Box>
+                    <Button variant="contained" onClick={()=>{startSearch()}} style={{marginTop: 10, width: 120}}> <SearchIcon /> Search</Button>
+                </Box>
+                </Paper> }  
+                <Button onClick={()=>{setHideSearchBar(!hideSearchBar)}}>{!hideSearchBar ? "Hide" : "Show"} Search Bar</Button>
             </Box>
-                <Button variant="outlined" onClick={()=>{startSearch()}}>Search</Button>
-                <Divider style={{marginTop: 25, marginBottom: 25}} />
-            </Box>
-            
         </Box>
     )
 }

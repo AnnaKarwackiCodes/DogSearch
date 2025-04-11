@@ -5,6 +5,8 @@ import DrawerList from "../Components/DrawerList";
 import MenuIcon from '@mui/icons-material/Menu';
 import SearchScreen from "./SearchScreen";
 import FavoritedDogsScreen from "./FavoritedDogsScreen";
+import { logout } from "../Helpers/api-client";
+import { useDispatch } from "react-redux";
 
 
 export default function AuthLandingScreen(){
@@ -12,6 +14,13 @@ export default function AuthLandingScreen(){
         return store.userInfo.curScreen;
       });
     const [isOpen, setIsOpen] = React.useState(false);
+    const dispatch = useDispatch();
+
+    React.useEffect(() => {
+        setTimeout(()=> {
+            logout(dispatch);
+        },3600000);
+    }, []);
     
     return (
         <Box width={'100%'}>

@@ -8,6 +8,7 @@ import { Dog } from "../Helpers/typing";
 import PetsIcon from '@mui/icons-material/Pets';
 import { getMatchingDog } from "../Helpers/api-client";
 import DogCard from "../Components/DogCard";
+import DoggleTitle from "../Components/DoogleTitle";
 
 
 export default function FavoritedDogsScreen(){
@@ -48,7 +49,7 @@ export default function FavoritedDogsScreen(){
         <Box width={'100%'} style={{flex: 1}}>
             <Box style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                 <Box>
-                    <Typography variant="h3">Doggle</Typography>
+                    <DoggleTitle />
                     <Typography variant="h4">Your Favorited Doggies</Typography>
                 </Box>
                 {results.length === 0 && 

@@ -1,12 +1,11 @@
 import * as React from "react";
-import { Box, Card, Typography, TextField, Button, Alert, Drawer, Divider } from "@mui/material";
+import { Box, Typography } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
-import DrawerList from "../Components/DrawerList";
-import MenuIcon from '@mui/icons-material/Menu';
 import PaginationGrid from "../Components/PaginationGrid";
 import SearchBar from "../Components/SearchBar";
 import { getDogs, getPaginationResult } from "../Helpers/api-client";
 import { setNextPage, setPrevPage, setSearchResults } from "../redux/reducers/SearchResults";
+import DoggleTitle from "../Components/DoogleTitle";
 
 
 export default function SearchScreen(){
@@ -59,7 +58,7 @@ export default function SearchScreen(){
     return (
         <Box width={'100%'}>
             <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
-                <Typography variant="h3">Doggle</Typography>
+                <DoggleTitle />
                 <Typography variant="h4">The search engine for dogs</Typography>
             </Box>
             <Box margin={'auto'}>
