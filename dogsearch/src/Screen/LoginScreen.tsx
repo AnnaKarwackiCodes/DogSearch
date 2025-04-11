@@ -18,12 +18,11 @@ export default function LoginScreen(){
         <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
             <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
                 <DoggleTitle />
-                <Divider style={{marginTop: 25, marginBottom: 25}} />
-                <Typography variant="h4">The search engine for dogs</Typography>
+                <Typography variant="h5">The search engine for dogs</Typography>
             </Box>
             <Card variant="outlined" style={{width:'300px', margin:'auto', padding:15}}>
                 <Typography variant="h4">Login</Typography>
-                <Typography variant="body2">Enter your name and email to view cute dogs in your area!</Typography>
+                <Typography variant="body2">Enter your name and email to view cute dogs!</Typography>
                 <Box style={{padding: 15}}>
                     <TextField 
                         id="outlined-basic" 

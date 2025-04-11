@@ -50,7 +50,7 @@ export default function FavoritedDogsScreen(){
             <Box style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                 <Box>
                     <DoggleTitle />
-                    <Typography variant="h4">Your Favorited Doggies</Typography>
+                    <Typography variant="h5">Your Favorited Doggies</Typography>
                 </Box>
                 {results.length === 0 && 
                     <Box style={{width: 300, padding: 25}} margin={'auto'}>

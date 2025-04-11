@@ -30,6 +30,7 @@ export default function SearchBar(){
             console.log(error);
         });
     }, []);
+
     
     function startSearch(){
         dispatch(setSearchResults({results: []}));
@@ -44,6 +45,7 @@ export default function SearchBar(){
             .then((dogs: any) => {
                 console.log(dogs);
                 dispatch(setSearchResults({results: dogs.data}));
+
             })
             .catch((error: any) => {
                 console.log(error);
