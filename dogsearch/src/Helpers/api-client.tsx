@@ -59,14 +59,16 @@ function getDogBreeds():Promise<any>{
   })
 }
 
-function getDogSearchResults(breeds:string[], zipCodes:string[], ageMin:number, ageMax:number, size: number, from: string, sort: string):Promise<any>{
+function getDogSearchResults(breeds:string[], zipCodes:string[], ageMin:number, ageMax:number, size: number, sort: string):Promise<any>{
   return new Promise((resolve, reject) => {
     axios.get(`${endpoint}/dogs/search`,{
       params: {
         breeds: breeds,
         zipCodes: zipCodes,
         ageMin: ageMin,
-        ageMax: ageMax
+        ageMax: ageMax,
+        size: size,
+        sort: sort
       },
       paramsSerializer: function (params) {
         return qs.stringify(params, {arrayFormat: 'brackets'})
@@ -162,9 +164,6 @@ function locationSearch(city: string, states: string[], geoBoundingBox: any, siz
       body: {
         city: city,
         states: states,
-        geoBoundingBox: geoBoundingBox,
-        size: size,
-        from: from
       },
       withCredentials: true
     }

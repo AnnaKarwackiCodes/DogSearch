@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, Typography, TextField, Button, Alert } from "@mui/material";
+import { Box, Card, Typography, TextField, Button, Alert, Divider } from "@mui/material";
 import { login } from "../Helpers/api-client";
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -18,6 +18,7 @@ export default function LoginScreen(){
         <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
             <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
                 <Typography variant="h3">Doggle</Typography>
+                <Divider style={{marginTop: 25, marginBottom: 25}} />
                 <Typography variant="h4">The search engine for dogs</Typography>
             </Box>
             <Card variant="outlined" style={{width:'300px', margin:'auto', padding:15}}>

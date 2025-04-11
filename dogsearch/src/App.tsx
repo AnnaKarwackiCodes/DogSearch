@@ -12,7 +12,7 @@ function App() {
 
   return (
     <Box>
-      {loginSuccess === -1 && <LoginScreen/>}
+      {(loginSuccess === -1 || loginSuccess === 0) && <LoginScreen/>}
       {loginSuccess === 1 && <AuthLandingScreen/>}
     </Box>
   );

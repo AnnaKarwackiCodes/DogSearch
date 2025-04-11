@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, Typography, TextField, Button, Alert, Drawer } from "@mui/material";
+import { Box, Card, Typography, TextField, Button, Alert, Drawer, Divider } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import DrawerList from "../Components/DrawerList";
 import MenuIcon from '@mui/icons-material/Menu';
@@ -28,7 +28,16 @@ export default function SearchScreen(){
     });
 
     const handleChange = (event: React.ChangeEvent<unknown>, value: number) => {
-        getPaginationResult(value > curPage ? nextPage : prevPage)
+        console.log(value);
+        let temp = '';
+        if(value > curPage){
+            temp = nextPage;
+        } else if (value < curPage){
+            temp = prevPage;
+        } else {
+            return;
+        }
+        getPaginationResult(temp)
         .then((data: any) => {
             console.log(data);
             dispatch(setPrevPage({prev: data.prev?data.prev: ''}));
