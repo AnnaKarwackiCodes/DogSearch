@@ -24,7 +24,7 @@ export default function AuthLandingScreen(){
     
     return (
         <Box width={'100%'}>
-            <Button style={{position:'fixed', left:0, top: 0, backgroundColor: 'white'}} onClick={() => {setIsOpen(true)}}>Menu <MenuIcon/></Button>
+            <Button style={{position:'fixed', left:0, top: 0, backgroundColor: 'white', color: '#023047'}} onClick={() => {setIsOpen(true)}}>Menu <MenuIcon/></Button>
             <Drawer open={isOpen} onClose={()=>{setIsOpen(false)}} style={{flex: 1, left: 0}}>
                 <DrawerList closeMenu={() => {setIsOpen(false)}}/>
             </Drawer>

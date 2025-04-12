@@ -3,7 +3,8 @@ import { Box, Button, Autocomplete, TextField, Typography, Select, MenuItem, Sel
 import { useDispatch } from 'react-redux';
 import { getDogBreeds, getDogs, getDogSearchResults } from "../Helpers/api-client";
 import { setSearchResults, setNextPage, setPrevPage, setTotalEntries, setTotalPages } from "../redux/reducers/SearchResults";
-import Divider from '@mui/material/Divider';
+import KeyboardArrowUpIcon from '@mui/icons-material/KeyboardArrowUp';
+import KeyboardArrowDownIcon from '@mui/icons-material/KeyboardArrowDown';
 import SearchIcon from '@mui/icons-material/Search';
 
 
@@ -68,6 +69,7 @@ export default function SearchBar(){
         <Box>
             <Box style={{width: '60%'}} margin={'auto'}>
                 {!hideSearchBar && <Paper elevation={3} style={{padding: 15}}>
+                <Typography variant="body1">Start your search here:</Typography>
                 <Box>
                     <Autocomplete
                         disablePortal
@@ -157,10 +159,10 @@ export default function SearchBar(){
                     </Stack>
                 </Box>
                 <Box>
-                    <Button variant="contained" onClick={()=>{startSearch()}} style={{marginTop: 10, width: 120}}> <SearchIcon /> Search</Button>
+                    <Button variant="contained" onClick={()=>{startSearch()}} style={{marginTop: 10, width: 120, backgroundColor: '#FFB703', color: '#023047'}}> <SearchIcon /> Search</Button>
                 </Box>
                 </Paper> }  
-                <Button onClick={()=>{setHideSearchBar(!hideSearchBar)}}>{!hideSearchBar ? "Hide" : "Show"} Search Bar</Button>
+                <Button style={{color: '#023047'}} onClick={()=>{setHideSearchBar(!hideSearchBar)}}>{!hideSearchBar ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}{!hideSearchBar ? "Hide" : "Show"} Search Bar</Button>
             </Box>
         </Box>
     )

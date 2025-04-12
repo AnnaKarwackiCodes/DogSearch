@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Card, CardContent, CardMedia, Box, Typography, Button } from "@mui/material";
+import { Card, CardContent, CardMedia, Box, Typography, Button, Paper } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import { getDogBreeds, getDogSearchResults, getDogs } from "../Helpers/api-client";
 import { Dog, DogCardObj } from "../Helpers/typing";
@@ -55,25 +55,27 @@ export default function DogCard({dogObject, showFav}: DogCardObj){
     }
 
     return (
-        <Card variant="outlined" style={{width: 250, alignContent: 'center', margin: 'auto'}}>
-            <CardContent>
-            <CardMedia
-                sx={{ width: 200, height: 200 }}
-                image={dogObject.img}
-                title={dogObject.name}
-            />
-            <Box>
-                <Typography>Meet {dogObject.name}!</Typography>
-                <Typography>Breed: {dogObject.breed}</Typography>
-                <Typography>Zip Code: {dogObject.zip_code}</Typography>
-                {showFav && <Button style={{color: 'red'}} onClick={() => {
-                    addFavorite();
-                }}> 
-                    {isFaved ? <FavoriteIcon style={{color: 'red'}}/> : <FavoriteBorderIcon style={{color: 'red'}}/> }
-                    {isFaved ? "Unfavorite" : "Favorite"}
-                </Button>}
-            </Box>
-            </CardContent>
-        </Card>
+        <Paper elevation={6} style={{width: '250px'}}>
+            <Card style={{width: 250, alignContent: 'center', margin: 'auto'}}>
+                <CardContent>
+                <CardMedia
+                    sx={{ width: 200, height: 200 }}
+                    image={dogObject.img}
+                    title={dogObject.name}
+                />
+                <Box>
+                    <Typography variant="h6">Meet {dogObject.name}!</Typography>
+                    <Typography>Breed: {dogObject.breed}</Typography>
+                    <Typography>Zip Code: {dogObject.zip_code}</Typography>
+                    {showFav && <Button style={{color: '#FB8500'}} onClick={() => {
+                        addFavorite();
+                    }}> 
+                        {isFaved ? <FavoriteIcon style={{color: '#FB8500'}}/> : <FavoriteBorderIcon style={{color: '#FB8500'}}/> }
+                        {isFaved ? "Unfavorite" : "Favorite"}
+                    </Button>}
+                </Box>
+                </CardContent>
+            </Card>
+        </Paper>
     )
 }

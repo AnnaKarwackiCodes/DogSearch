@@ -23,7 +23,7 @@ export default function PaginationGrid({results, pageTotal, handlePageChange, cu
                     </Grid>
                 ))}
             </Grid>
-            {pageTotal > 1 && <Stack alignItems="center" padding={5}><Pagination boundaryCount={0} count={pageTotal} page={curPage} onChange={handlePageChange} siblingCount={0}/></Stack>}
+            {pageTotal > 1 && <Stack alignItems="center" padding={5} ><Pagination style={{backgroundColor: 'white', padding: 15, borderRadius: 15}} boundaryCount={0} count={pageTotal} page={curPage} onChange={handlePageChange} siblingCount={0}/></Stack>}
         </Box>
     )
 }

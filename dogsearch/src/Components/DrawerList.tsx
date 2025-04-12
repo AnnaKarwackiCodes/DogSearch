@@ -18,31 +18,31 @@ export default function DrawerList({closeMenu}: any){
 
     return(
         <Box width={'200px'} p={'15px'}>
-            <Box style={{position:'fixed', left:100, top: 0}}>
-                <Button onClick={() => {closeMenu();}}>Close Menu<MenuOpenIcon /></Button>
+            <Box style={{position:'fixed', left:100, top: 0,}} >
+                <Button style={{color: '#023047'}} onClick={() => {closeMenu();}}>Close Menu<MenuOpenIcon /></Button>
             </Box>
             <Box marginTop={'35px'}>
-                <Typography>Welcome {userName}!</Typography>
+                <Typography variant="h6">Welcome {userName}!</Typography>
             </Box>
             <List>
                 <ListItem key={'Search'} disablePadding>
                     <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 0}))}}>
                     <ListItemIcon>
-                        <SearchIcon />
+                        <SearchIcon style={{color: '#FFB703'}}/>
                     </ListItemIcon>
-                    <ListItemText primary={'Search'} />
+                    <ListItemText primary={'Search Dogs'} />
                     </ListItemButton>
                 </ListItem>
                 <ListItem key={'Favorite'} disablePadding>
                     <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 1}))}}>
                     <ListItemIcon>
-                        <FavoriteBorderIcon />
+                        <FavoriteBorderIcon style={{color: '#FB8500'}}/>
                     </ListItemIcon>
-                    <ListItemText primary={'Favorites'} />
+                    <ListItemText primary={'Favorite Dogs'} />
                     </ListItemButton>
                 </ListItem>
             </List>
-            <Button variant="outlined" onClick={()=>{
+            <Button variant="outlined" style={{color: '#219EBC'}} onClick={()=>{
                 logout(dispatch);
             }}>
                 Logout

@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, Typography, TextField, Button, Alert, Divider } from "@mui/material";
+import { Box, Paper, Typography, TextField, Button, Alert } from "@mui/material";
 import { login } from "../Helpers/api-client";
 import { useDispatch, useSelector } from 'react-redux';
 import DoggleTitle from "../Components/DoogleTitle";
@@ -16,11 +16,11 @@ export default function LoginScreen(){
 
     return (
         <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-            <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
+            <Paper elevation={12} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center', backgroundColor:'white', paddingBottom:15, marginBottom:35, paddingTop:5}} >
                 <DoggleTitle />
                 <Typography variant="h5">The search engine for dogs</Typography>
-            </Box>
-            <Card variant="outlined" style={{width:'300px', margin:'auto', padding:15}}>
+            </Paper>
+            <Paper elevation={4} style={{width:'300px', margin:'auto', padding:15}}>
                 <Typography variant="h4">Login</Typography>
                 <Typography variant="body2">Enter your name and email to view cute dogs!</Typography>
                 <Box style={{padding: 15}}>
@@ -46,6 +46,7 @@ export default function LoginScreen(){
                     />
                     <Button 
                         variant="contained"
+                        style={{backgroundColor: '#023047'}}
                         onClick={() => {
                             login(name, email, dispatch);
                         }}
@@ -54,7 +55,7 @@ export default function LoginScreen(){
                     </Button>
                     {loginSuccess === 0 && <Alert severity="error">There was an issue logging in, please check your name and email</Alert>}
                 </Box>
-            </Card>
+            </Paper>
         </Box>
     )
 }

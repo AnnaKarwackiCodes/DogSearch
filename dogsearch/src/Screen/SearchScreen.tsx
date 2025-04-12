@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Typography } from "@mui/material";
+import { Box, Paper, Typography } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationGrid from "../Components/PaginationGrid";
 import SearchBar from "../Components/SearchBar";
@@ -61,15 +61,10 @@ export default function SearchScreen(){
     }, [curPage]);
     return (
         <Box width={'100%'}>
-            <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} marginBottom={5} marginTop={2}>
+            <Paper elevation={12} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center', backgroundColor: 'white', paddingBottom:15, marginBottom:35, paddingTop:5}}>
                 <DoggleTitle />
                 <Typography variant="h5">The search engine for dogs</Typography>
-                <Box width={'60%'} margin={'auto'} marginTop={2}>
-                    <Typography variant='body1' >Search for a dog using the form below. Once you have, you will see listings for various dogs. </Typography>
-                    <Typography variant='body1'>Go through and look at the various pups and you can favorite them. After you have favorited a few go and few all your favorites in the 'Favorite' screen. There we can help you find a match from your list of favorite dogs.</Typography>
-                    <Typography variant='body1'>Give it a go and enjoy looking at all these amazing dogs.</Typography>
-                </Box>
-            </Box>
+            </Paper>
             <Box margin={'auto'}>
                 <SearchBar/>
                 <PaginationGrid results={results} pageTotal={pageTotal} handlePageChange={handleChange} curPage={curPage}/>
