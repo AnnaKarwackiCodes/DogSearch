@@ -7,6 +7,7 @@ import SearchScreen from "./SearchScreen";
 import FavoritedDogsScreen from "./FavoritedDogsScreen";
 import { logout } from "../Helpers/api-client";
 import { useDispatch } from "react-redux";
+import Footer from "../Components/Footer";
 
 
 export default function AuthLandingScreen(){
@@ -29,6 +30,7 @@ export default function AuthLandingScreen(){
                 <DrawerList closeMenu={() => {setIsOpen(false)}}/>
             </Drawer>
             {curScreen === 0 ? <SearchScreen /> : <FavoritedDogsScreen/>}
+            <Footer />
         </Box>
     )
 }

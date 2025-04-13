@@ -6,6 +6,11 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: #8ECAE6;
+  min-height: 100vh;
+}
+
+.root div{
+  height: 100%;
 }
 
 code {

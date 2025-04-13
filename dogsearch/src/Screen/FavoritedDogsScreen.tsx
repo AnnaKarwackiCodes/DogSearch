@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Card, Typography, TextField, Button, Alert, Modal } from "@mui/material";
+import { Box, Paper, Typography, Button, Alert, Modal } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationGrid from "../Components/PaginationGrid";
 import SearchIcon from '@mui/icons-material/Search';
@@ -50,17 +50,18 @@ export default function FavoritedDogsScreen(){
     const handleClose = () => setOpen(false);
 
     return (
-        <Box width={'100%'} style={{flex: 1}}>
+        <Box width={'100%'} style={{flex: 1, justifyContent: 'center', alignItems: 'center'}}>
             <Box style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
-                <Box>
+                <Paper elevation={12} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center', backgroundColor: 'white', paddingBottom:15, marginBottom:35, paddingTop:5}}>
                     <DoggleTitle />
                     <Typography variant="h5">Your Favorited Doggies</Typography>
-                </Box>
+                </Paper>
                 {results.length === 0 && 
-                    <Box style={{width: 300, padding: 25}} margin={'auto'}>
-                        <Typography variant="body1">You have not added any dogs to your favorites. Trying adding some</Typography>
+                    <Paper style={{width: 300, padding: 25, margin:'auto', marginTop:'15vh', marginBottom: '15vh'}} >
+                        <Typography variant="h4">Wait!</Typography>
+                        <Typography variant="body1">You have not added any dogs to your favorites. Use the search and try adding some!</Typography>
                         <Button onClick={()=> {dispatch(setCurScreen({value: 0}))}}> <SearchIcon />Search Now for dogs to add.</Button>
-                    </Box>}
+                    </Paper>}
                 {results.length > 0 &&
                     <Box marginTop={5}>
                         <Typography variant="h5">You have added dogs to your favorites list.</Typography>
