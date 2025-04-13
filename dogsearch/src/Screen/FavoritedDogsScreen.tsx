@@ -103,11 +103,13 @@ export default function FavoritedDogsScreen(){
                     border: '2px solid #000',
                     boxShadow: 24,
                     p: 4,}}>
-                    <Box style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+                    <Box width= '100%' style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                         <Typography id="modal-modal-title" variant="h4" component="h2">
                         Found Your Match!
                         </Typography>
-                        <DogCard dogObject={matchedDog} showFav={false}/>
+                        <Box style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
+                            <DogCard dogObject={matchedDog} showFav={false}/>
+                        </Box>
                         <Button onClick={()=> {setOpen(false);}}>Close</Button>
                     </Box>
                 </Box>
