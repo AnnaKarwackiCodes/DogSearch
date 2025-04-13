@@ -55,11 +55,10 @@ export default function DogCard({dogObject, showFav}: DogCardObj){
     }
 
     return (
-        <Paper elevation={6} style={{width: '250px'}}>
-            <Card style={{width: 250, alignContent: 'center', margin: 'auto'}}>
+        <Card style={{width: 250, alignContent: 'center', margin: 'auto'}}>
                 <CardContent>
                 <CardMedia
-                    sx={{ width: 200, height: 200 }}
+                    sx={{ width: 220, height: 220 }}
                     image={dogObject.img}
                     title={dogObject.name}
                 />
@@ -76,6 +75,5 @@ export default function DogCard({dogObject, showFav}: DogCardObj){
                 </Box>
                 </CardContent>
             </Card>
-        </Paper>
     )
 }

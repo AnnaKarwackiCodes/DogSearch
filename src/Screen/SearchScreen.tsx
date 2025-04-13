@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, CircularProgress, Paper, Typography } from "@mui/material";
 import { useDispatch, useSelector } from 'react-redux';
 import PaginationGrid from "../Components/PaginationGrid";
 import SearchBar from "../Components/SearchBar";
@@ -12,6 +12,7 @@ export default function SearchScreen(){
 
     const dispatch = useDispatch();
     const [curPage, setCurPage] = React.useState(1);
+    const [showLoading, setShowLoading] = React.useState(false);
 
     const results = useSelector((store: any) => {
         return store.searchResults.results;
@@ -36,6 +37,8 @@ export default function SearchScreen(){
         } else {
             return;
         }
+        setShowLoading(true);
+        dispatch(setSearchResults({results: []}));
         getPaginationResult(temp)
         .then((data: any) => {
             console.log(data);
@@ -45,13 +48,16 @@ export default function SearchScreen(){
             .then((dogs: any) => {
                 console.log(dogs);
                 dispatch(setSearchResults({results: dogs.data}));
+                setShowLoading(false);
             })
             .catch((error: any) => {
                 console.log(error);
+                setShowLoading(false);
             })
         })
         .catch((error: any) => {
             console.log(error);
+            setShowLoading(false);
         })
         setCurPage(value);
       };
@@ -59,6 +65,7 @@ export default function SearchScreen(){
     React.useEffect(() => {
         window.scrollTo(0, 0);
     }, [curPage]);
+
     return (
         <Box width={'100%'}>
             <Paper elevation={12} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center', backgroundColor: 'white', paddingBottom:15, marginBottom:35, paddingTop:5}}>
@@ -67,6 +74,7 @@ export default function SearchScreen(){
             </Paper>
             <Box margin={'auto'}>
                 <SearchBar/>
+                {showLoading && <Box margin={'auto'} width={'auto'} textAlign={'center'}><CircularProgress style={{color: '#FB8500'}}/></Box>}
                 <PaginationGrid results={results} pageTotal={pageTotal} handlePageChange={handleChange} curPage={curPage}/>
             </Box>
         </Box>

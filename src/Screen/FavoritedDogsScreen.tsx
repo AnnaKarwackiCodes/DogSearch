@@ -81,7 +81,7 @@ export default function FavoritedDogsScreen(){
                                 });
                                 
                             }}  
-                            style={{marginTop: 5}}> 
+                            style={{marginTop: 5, backgroundColor: '#FB8500'}}> 
                             <PetsIcon /> Now Let's Find Your Match!
                         </Button>
                     </Box>
@@ -110,7 +110,7 @@ export default function FavoritedDogsScreen(){
                         <Box style={{alignItems: 'center', justifyContent: 'center', textAlign: 'center'}}>
                             <DogCard dogObject={matchedDog} showFav={false}/>
                         </Box>
-                        <Button onClick={()=> {setOpen(false);}}>Close</Button>
+                        <Button style={{color: '#023047'}} onClick={()=> {setOpen(false);}}>Close</Button>
                     </Box>
                 </Box>
             </Modal>

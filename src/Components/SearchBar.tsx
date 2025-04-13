@@ -1,5 +1,5 @@
 import * as React from "react";
-import { Box, Button, Autocomplete, TextField, Typography, Select, MenuItem, SelectChangeEvent, InputLabel, Stack, Paper } from "@mui/material";
+import { Box, Button, Autocomplete, TextField, Typography, Select, MenuItem, SelectChangeEvent, InputLabel, Stack, Paper, CircularProgress } from "@mui/material";
 import { useDispatch } from 'react-redux';
 import { getDogBreeds, getDogs, getDogSearchResults } from "../Helpers/api-client";
 import { setSearchResults, setNextPage, setPrevPage, setTotalEntries, setTotalPages } from "../redux/reducers/SearchResults";
@@ -20,6 +20,8 @@ export default function SearchBar(){
     const [sortQueryField, setSortQueryField] = React.useState('breed');
     const [sortQueryDirection, setSortQueryDirection] = React.useState('asc');
 
+    const [showLoading, setShowLoading] = React.useState(false);
+
     const [hideSearchBar, setHideSearchBar] = React.useState(false);
 
     React.useEffect(() => {
@@ -34,6 +36,7 @@ export default function SearchBar(){
 
     
     function startSearch(){
+        setShowLoading(true);
         dispatch(setSearchResults({results: []}));
         getDogSearchResults(dogBreed, zipCode, minAge, maxAge, resultSize, `${sortQueryField}:${sortQueryDirection}`)
         .then((data: any)=> {
@@ -47,14 +50,17 @@ export default function SearchBar(){
                 console.log(dogs);
                 dispatch(setSearchResults({results: dogs.data}));
                 setHideSearchBar(true);
+                setShowLoading(false);
             })
             .catch((error: any) => {
                 console.log(error);
+                setShowLoading(false);
             })
             
         })
         .catch((error: any) => {
             console.log(error);
+            setShowLoading(false);
         });
     }
     const handleQueryFieldChange = (event: SelectChangeEvent) => {
@@ -66,9 +72,9 @@ export default function SearchBar(){
     };
 
     return (
-        <Box>
-            <Box style={{width: '60%'}} margin={'auto'}>
-                {!hideSearchBar && <Paper elevation={3} style={{padding: 15}}>
+        <Box marginTop={{md: '2vh', lg: '5vh'}} marginBottom={{md: '2vh', lg: '5vh'}}>
+            <Box width={{ xs: '80%', sm: '75%', md: '60%' }} margin={'auto'}>
+                {!hideSearchBar && <Paper elevation={3} style={{padding: 15}} >
                 <Typography variant="body1">Start your search here:</Typography>
                 <Box>
                     <Autocomplete
@@ -161,6 +167,7 @@ export default function SearchBar(){
                 <Box>
                     <Button variant="contained" onClick={()=>{startSearch()}} style={{marginTop: 10, width: 120, backgroundColor: '#FFB703', color: '#023047'}}> <SearchIcon /> Search</Button>
                 </Box>
+                {showLoading && <CircularProgress style={{margin: 'auto', padding: 5}}/>}
                 </Paper> }  
                 <Button style={{color: '#023047'}} onClick={()=>{setHideSearchBar(!hideSearchBar)}}>{!hideSearchBar ? <KeyboardArrowUpIcon /> : <KeyboardArrowDownIcon />}{!hideSearchBar ? "Hide" : "Show"} Search Bar</Button>
             </Box>

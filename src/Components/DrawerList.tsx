@@ -26,7 +26,7 @@ export default function DrawerList({closeMenu}: any){
             </Box>
             <List>
                 <ListItem key={'Search'} disablePadding>
-                    <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 0}))}}>
+                    <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 0})); window.scrollTo(0, 0);}}>
                     <ListItemIcon>
                         <SearchIcon style={{color: '#FFB703'}}/>
                     </ListItemIcon>
@@ -34,7 +34,7 @@ export default function DrawerList({closeMenu}: any){
                     </ListItemButton>
                 </ListItem>
                 <ListItem key={'Favorite'} disablePadding>
-                    <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 1}))}}>
+                    <ListItemButton onClick={()=>{dispatch(setCurScreen({value: 1})); window.scrollTo(0, 0);}}>
                     <ListItemIcon>
                         <FavoriteBorderIcon style={{color: '#FB8500'}}/>
                     </ListItemIcon>

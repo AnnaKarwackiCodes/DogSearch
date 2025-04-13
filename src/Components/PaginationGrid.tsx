@@ -16,9 +16,9 @@ export default function PaginationGrid({results, pageTotal, handlePageChange, cu
 
     return (
         <Box width={'100%'} style={{flex: 1, alignItems: 'center', justifyContent: 'center', textAlign: 'center'}} margin={'auto'} paddingTop={2} marginBottom={5}>
-            <Grid container spacing={{ xs: 1, md: 3 }} columns={{ xs: 4, sm: 10, md: 19 }} sx={{ justifyContent: "center", alignItems: "center",}}>
+            <Grid container spacing={{ xs: 1, md: 3 }} columns={{ xs: 4, sm: 10, md: 19, lg: 15, xl: 10 }} sx={{ justifyContent: "center", alignItems: "center",}}>
                 {localResults.map((value: Dog, index: number) => (
-                    <Grid key={index} size={{ xs: 2, sm: 4, md: 4 }}>
+                    <Grid key={index} size={{ xs: 3, sm: 4, md: 6, lg: 4, xl: 3 }} sx={{ justifyContent: "center", alignItems: "center",}}>
                         <DogCard dogObject={value} showFav={true}/>
                     </Grid>
                 ))}

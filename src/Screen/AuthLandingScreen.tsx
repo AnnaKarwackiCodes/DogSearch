@@ -29,7 +29,9 @@ export default function AuthLandingScreen(){
             <Drawer open={isOpen} onClose={()=>{setIsOpen(false)}} style={{flex: 1, left: 0}}>
                 <DrawerList closeMenu={() => {setIsOpen(false)}}/>
             </Drawer>
-            {curScreen === 0 ? <SearchScreen /> : <FavoritedDogsScreen/>}
+            <Box minHeight={'90vh'}>
+                {curScreen === 0 ? <SearchScreen /> : <FavoritedDogsScreen/>}
+            </Box>
             <Footer />
         </Box>
     )
