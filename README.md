@@ -4,8 +4,8 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 ## Libraries of Note:
 
- [https://mui.com/](Material UI)
- [https://react-redux.js.org/](React Redux)
+ [Material UI](https://mui.com/)
+ [React Redux](https://react-redux.js.org/)
 
 ## Run the App Locally
 
@@ -15,6 +15,4 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 ```
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
 
-The page will reload if you make edits.\
-You will also see any lint errors in the console.
 
